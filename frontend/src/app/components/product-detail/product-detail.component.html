@@ -1,0 +1,270 @@
+<div class="container mx-auto px-6 py-12">
+  
+  <div class="flex flex-wrap md:flex-nowrap gap-10 justify-center items-center">
+    <div class="w-full md:w-1/2 shadow">
+      <div class="bg-white p-6 rounded-lg shadow-lg">
+        <div class="flex flex-col gap-4 items-center">
+          <div class="w-full-96 gap-4 shadow cursor-pointer">
+            <img
+              [src]="selectedImage"
+              alt="Product Image"
+              class="w-full h-96 object-cover rounded-lg shadow-lg"
+            />
+          </div>
+
+          <div class="flex gap-7 justify-center">
+            <img
+              *ngFor="let image of product.images"
+              [src]="image"
+              (click)="selectImage(image)"
+              alt="Product Thumbnail"
+              class="w-24 h-24 object-cover rounded-lg shadow-lg cursor-pointer"
+            />
+          </div>
+
+          <div class="w-full md:w-1/2 text-center">
+            <h1 class="text-3xl font-semibold text-purple-800 mb-2">
+              {{ product.name }}
+            </h1>
+            <div class="space-x-2">
+              <span class="!text-xl text-gray-600 gap-10 font-semibold mt-2">
+                <s> {{ product.price }}₹</s>
+              </span>
+
+              <span class="!text-1xl text-orange-400">
+                {{ product.discount }}% OFF</span
+              >
+
+              <span class="text-xl text-purple-600 gap-10 font-semibold mt-2">
+                {{ SellingPrice }}₹
+              </span>
+            </div>
+
+            <!-- Product Short Description -->
+            <p class="text-gray-700 mt-6 font-semibold">
+              {{ product.shortDescription }}
+            </p>
+            <div class="flex justify-center align-top w-80 h-10">
+              <div class="flex space-x-2">
+                <button
+                  class="mt-0 px-3 py-1 text-purple-500 rounded-lg shadow  focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
+                  mat-fab
+                  color="warn"
+                  title="Add to WishList"
+                  (click)="addToWishList(product)"
+                >
+                  <mat-icon class="text-white-500">
+                    {{ isInWishList(product) ? 'favorite' : 'favorite_border' }}
+                  </mat-icon>
+                </button>
+                <button
+                (click)="addToCart(product)"
+                class="mt-0 px-4  bg-purple-600 text-white rounded-lg shadow hover:bg-purple-700"
+              >
+                <mat-icon>
+                  {{ isProductInCart(product._id!) ? 'remove_shopping_cart' : 'add_shopping_cart' }}
+                </mat-icon>
+              </button>
+           
+              </div>
+            </div>
+            
+                <!-- <button
+                  class="mt-6 px-6 py-3 bg-purple-600 text-white rounded-lg shadow hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-600 focus:ring-offset-2"
+                  mat-fab
+                  color="warn"
+                  title="Add to WishList"
+                  (click)="addToWishList(product)"
+                >
+                  @if(isInWishList(product)){
+                  <mat-icon class="text-red-500">favorite</mat-icon> Remove from WishList }
+                  <mat-icon class="text-red-500">favorite_border</mat-icon> Add to WishList
+                </button> -->
+              
+
+            <!-- Add to Cart Button -->
+      
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Product Detailed Section -->
+  <div class="mt-12 text-center">
+    <div class="bg-white p-6 rounded-lg shadow-lg mx-auto w-full md:w-3/4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Details -->
+        <div>
+          <h3 class="text-lg font-medium text-gray-700">Dosage Form</h3>
+          <p class="text-gray-600">Tablet</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-medium text-gray-700">Strength</h3>
+          <p class="text-gray-600">500 mg</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-medium text-gray-700">Manufacturer</h3>
+          <p class="text-gray-600">PharmaCo</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-medium text-gray-700">
+            Prescription Required
+          </h3>
+          <p class="text-gray-600">Yes</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-medium text-gray-700">Packaging Type</h3>
+          <p class="text-gray-600">Blister Pack</p>
+        </div>
+        <div>
+          <h3 class="text-lg font-medium text-gray-700">Availability</h3>
+          <p class="text-gray-600">In Stock</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Additional Information Section -->
+    <div class="mt-8">
+      <h2 class="text-2xl font-semibold text-purple-800 mb-4">
+        Additional Information
+      </h2>
+      <div class="bg-white p-6 rounded-lg shadow-lg mx-auto w-full md:w-3/4">
+        <p class="text-gray-700">{{ product.description }}</p>
+      </div>
+    </div>
+    <!-- 
+
+    @if(similarProducts.length){ 
+      <div class="my-6">
+        <h4 class="text-2xl font-bold text-gray-800 mb-4 ml-2 lg:ml-4">Similar Products</h4>
+        <div class="flex overflow-x-auto gap-4">
+          <div
+            *ngFor="let product of similarProducts; trackBy: trackByFn"
+            class="flex-shrink-0 w-1/2 sm:w-1/3 md:w-1/4 lg:w-1/5 bg-white rounded-lg shadow-md hover:shadow-xl transition-shadow duration-300 p-4"
+          >
+            <app-product-card [product]="product"></app-product-card>
+          </div>
+        </div>
+      </div>
+    }
+  -->
+
+    <!-- 
+  @if(similarProducts.length){
+    <div class="mt-4">
+      <h4 class="text-2xl font-bold">Similar Products</h4>
+      <div class="flex flex-wrap gap-4 justify-between">
+        @for (product of similarProducts; track $index) {
+        <div class="product-card">
+          <app-product-card [product]="product"></app-product-card>
+        </div>
+        }
+      </div>
+    </div>
+    }
+   -->
+    <!-- <div *ngIf="similarProducts.length > 0" class="mt-12">
+    <h2 class="text-2xl font-semibold text-purple-800 mb-4">Similar Products</h2>
+    <div class="bg-white p-6 rounded-lg shadow-lg mx-auto w-full md:w-3/4">
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <app-product-card *ngFor="let similarProduct of similarProducts" [product]="similarProduct">
+        </app-product-card>
+      </div>
+    </div>
+  </div>
+ -->
+
+    <div class="mt-12">
+      <h2 class="text-2xl font-semibold text-purple-800 mb-4">
+        Customer Reviews
+      </h2>
+      <div class="bg-white p-6 rounded-lg shadow-lg mx-auto w-full md:w-3/4">
+        <div class="space-y-6">
+          <!-- Review 1 -->
+          <div class="border-b pb-6">
+            <div class="flex justify-between items-center">
+              <h3 class="text-lg font-semibold text-gray-700">John Doe</h3>
+              <div class="flex items-center">
+                <span class="text-purple-600 font-bold">4.5</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  class="w-5 h-5 text-yellow-500"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 .587l3.668 7.57 8.332 1.15-6.001 5.912 1.499 8.285-7.498-4.115-7.498 4.115 1.499-8.285-6.001-5.912 8.332-1.15z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <p class="text-gray-600 mt-2">
+              Great product! Helped me recover quickly and the packaging was
+              excellent.
+            </p>
+          </div>
+
+          <!-- Review 2 -->
+          <div class="border-b pb-6">
+            <div class="flex justify-between items-center">
+              <h3 class="text-lg font-semibold text-gray-700">Jane Smith</h3>
+              <div class="flex items-center">
+                <span class="text-purple-600 font-bold">3.8</span>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  class="w-5 h-5 text-yellow-500"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    d="M12 .587l3.668 7.57 8.332 1.15-6.001 5.912 1.499 8.285-7.498-4.115-7.498 4.115 1.499-8.285-6.001-5.912 8.332-1.15z"
+                  />
+                </svg>
+              </div>
+            </div>
+            <p class="text-gray-600 mt-2">
+              Works fine but the delivery was delayed.
+            </p>
+          </div>
+
+          <!-- Add a Review -->
+          <div class="mt-6">
+            <h3 class="text-lg font-semibold text-purple-800">
+              Write a Review
+            </h3>
+            <form class="mt-4">
+              <div class="mb-4">
+                <label for="rating" class="block text-gray-700">Rating:</label>
+                <select
+                  id="rating"
+                  class="w-full mt-2 px-3 py-2 border rounded-lg shadow-sm focus:ring-purple-600 focus:border-purple-600"
+                >
+                  <option value="5">5 - Excellent</option>
+                  <option value="4">4 - Good</option>
+                  <option value="3">3 - Average</option>
+                  <option value="2">2 - Poor</option>
+                  <option value="1">1 - Terrible</option>
+                </select>
+              </div>
+              <div class="mb-4">
+                <label for="review" class="block text-gray-700">Review:</label>
+                <textarea
+                  id="review"
+                  rows="4"
+                  class="w-full mt-2 px-3 py-2 border rounded-lg shadow-sm focus:ring-purple-600 focus:border-purple-600"
+                ></textarea>
+              </div>
+              <button
+                type="submit"
+                class="px-6 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
+              >
+                Submit Review
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

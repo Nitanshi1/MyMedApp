@@ -1,0 +1,89 @@
+<div class="flex flex-col items-center" style="padding: 0 2.5rem; margin-top: 2.5rem;">
+  @if(id){
+    <h1 style="font-size: 2rem; font-weight: bold; margin-bottom: 1.5rem;">Update Product</h1>
+  }@else{
+    <h1 style="font-size: 2rem; font-weight: bold; margin-bottom: 1.5rem;">Add New Product</h1>
+  }
+
+  <form class="shadow" style="padding: 2rem; border-radius: 1rem; background-color: #f9f9f9; width: 100%; max-width: 900px;" [formGroup]="productForm">
+    <div class="flex flex-wrap" style="gap: 1rem;">
+      
+      <mat-form-field class="w-full" style="margin-bottom: 1rem;">
+        <mat-label>Category</mat-label>
+        <mat-select formControlName="categoryId">
+          @for (item of categories; track $index){
+            <mat-option [value]="item._id">{{item.name}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      
+      <mat-form-field class="w-full" style="margin-bottom: 1rem;">
+        <mat-label>Brand</mat-label>
+        <mat-select formControlName="brandId">
+          @for (item of brands; track $index){
+            <mat-option [value]="item._id">{{item.name}}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+      
+      <mat-form-field class="w-full" style="margin-bottom: 1rem;">
+        <mat-label>Name</mat-label>
+        <input matInput type="text" formControlName="name" />
+      </mat-form-field>
+
+      <mat-form-field class="w-full" style="margin-bottom: 1rem;">
+        <mat-label>Short Description</mat-label>
+        <input matInput type="text" formControlName="shortDescription" />
+      </mat-form-field>
+
+      <mat-form-field class="w-full" style="margin-bottom: 1rem;">
+        <mat-label>Description</mat-label>
+        <textarea matInput rows="5" formControlName="description"></textarea>
+      </mat-form-field>
+
+      <mat-form-field class="w-full" style="margin-bottom: 1rem;">
+        <mat-label>Price</mat-label>
+        <input matInput type="number" formControlName="price" />
+      </mat-form-field>
+
+      <mat-form-field class="w-full" style="margin-bottom: 1rem;">
+        <mat-label>Discount</mat-label>
+        <input matInput type="number" formControlName="discount" />
+      </mat-form-field>
+              
+  <div class="w-full flex gap-8">  <mat-checkbox formControlName="isFeatured">Featured</mat-checkbox>
+    <mat-checkbox class="example-margin" formControlName="isNewProduct">New </mat-checkbox></div>
+      <div class="w-full flex flex-col" formArrayName="images" style="margin-bottom: 1.5rem;">
+        <div class="flex justify-between" style="align-items: center;">
+          <h4 style="margin: 0; font-size: 1.25rem; font-weight: 600;">Images</h4>
+          <div>
+            <button mat-raised-button color="primary" type="button" style="margin-right: 0.5rem;" (click)="addImage()">
+              Add Image
+            </button>
+            <button mat-raised-button color="warn" type="button" (click)="removeImage()">
+              Remove Image
+            </button>
+          </div>
+        </div>
+        <div *ngFor="let item of images.controls; let i = index">
+          <mat-form-field class="w-full" style="margin-top: 1rem;">
+            <mat-label>Image {{ i + 1 }}</mat-label>
+            <input matInput type="text" [formControlName]="i" />
+          </mat-form-field>
+        </div>
+      </div>
+
+      <div class="flex justify-center" style="margin-top: 2rem;">
+        @if(id){
+          <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid" (click)="updateProduct()" style="padding: 0.75rem 2rem; font-size: 1rem; font-weight: 600; border-radius: 0.5rem;">
+            Update
+          </button>
+        }@else{
+          <button mat-raised-button color="primary" type="submit" [disabled]="productForm.invalid" (click)="addProduct()" style="padding: 0.75rem 2rem; font-size: 1rem; font-weight: 600; border-radius: 0.5rem;">
+            Add
+          </button>
+        }
+      </div>
+    </div>
+  </form>
+</div>

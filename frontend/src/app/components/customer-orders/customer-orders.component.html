@@ -1,0 +1,57 @@
+<div class="bg-white shadow-xl rounded-xl overflow-hidden">
+    <div class="mb-6 text-center mt-4">
+      <h2 class="text-3xl font-bold text-purple-600">My Orders</h2>
+    </div>
+  
+    <!-- Outer loop for orders -->
+    @for (order of orders; track $index) {
+      <div class="border-b-2 border-purple-200 p-4 bg-gray-100 w-88 ml-40 mr-40">
+        <!-- Order Header -->
+        <div class="flex items-center justify-between mb-4">
+          <h2 class="text-xl font-bold text-purple-600">Order #{{ $index + 1 }}</h2>
+          <div class="text-sm text-gray-500">
+            <p><b>Order ID:</b> {{ order._id }}</p>
+            <p><b>Date:</b> {{ order.date | date:'medium'}}</p>
+            <span>Order Status:{{order.status}}</span>
+          </div>
+        </div>
+  
+        <!-- Inner loop for items in each order -->
+        <div
+          *ngFor="let item of order.items"
+          class="flex items-center justify-between px-6 py-4 border-b"
+        >
+          <div class="flex items-center">
+            <img
+              [src]="item.product.images[0]"
+              alt="Product"
+              class="w-20 h-20 object-cover rounded shadow"
+            />
+            <div class="ml-4 space-y-1">
+              <h3 class="text-lg font-semibold text-purple-700">{{ item.product.name }}</h3>
+              <p class="text-sm text-gray-500">
+                <b>Price:</b> <s>{{ item.product.price }}₹</s>
+              </p>
+              <p class="text-sm text-orange-500">{{ item.product.discount }}% OFF</p>
+              <p class="text-lg text-purple-500 font-bold">
+                <b class="text-gray-600 text-1xl">Amount:</b>
+                {{ SellingPrice(item.product) }}₹ x {{ item.quantity }} =
+                {{ SellingPrice(item.product) * item.quantity }}₹
+              </p>
+            </div>
+          </div>
+        </div>
+  
+        <!-- Order Summary -->
+        <div class="mt-4 bg-gray-50 p-4 rounded shadow-sm text-right">
+          <p class="text-md text-gray-700">
+            <b>Total Items:</b> {{ order.items.length }}
+          </p>
+          <p class="text-md text-purple-700 font-semibold">
+            <b>Order Total:</b> ₹{{ getOrderTotal(order.items) }}
+          </p>
+        </div>
+      </div>
+    }
+  </div>
+  

@@ -1,0 +1,49 @@
+<div class="min-h-screen bg-gray-100 flex justify-center items-center py-1 ">
+    <div class="bg-white shadow-md rounded-lg p-6 w-full max-w-4xl">
+   
+      <div class="flex items-center space-x-4 mb-6">
+        <img
+          src="./assets/adminicon.png"
+          alt="User Avatar"
+          class="w-16 h-16 rounded-full object-cover"
+        />
+        <div>
+          <h2 class="text-xl font-semibold text-gray-800">{{ authService.userName }}</h2>
+          <p class="text-gray-600">{{ authService.userEmail }}</p>
+        </div>
+      </div>
+  
+      <div class="mb-6">
+        <h3 class="text-lg font-semibold text-purple-700">Account Information</h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          <div class="border p-4 rounded-lg bg-gray-50">
+            <h4 class="text-sm font-semibold text-gray-700">Full Name</h4>
+            <p>{{ authService.userName }}</p>
+          </div>
+          <div class="border p-4 rounded-lg bg-gray-50">
+            <h4 class="text-sm font-semibold text-gray-700">Email</h4>
+            <p>{{ authService.userEmail }}</p>
+          </div>
+      
+        </div>
+      </div>
+
+  
+      <!-- Account Settings -->
+      <!-- <div class="text-right">
+        <button
+          class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-500 transition"
+          (click)="editProfile()"
+        >
+          Edit Profile
+        </button>
+        <button
+          class="ml-3 bg-gray-200 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-300 transition"
+          (click)="logout()"
+        >
+          Logout
+        </button>
+      </div>
+    </div>
+  -->
+</div>

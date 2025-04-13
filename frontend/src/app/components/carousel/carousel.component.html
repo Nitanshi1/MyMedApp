@@ -1,0 +1,18 @@
+
+<div class="carousel-container relative w-full h-64 overflow-hidden bg-purple-600 rounded-lg shadow-lg">
+    <div class="carousel-slides flex transition-transform duration-700 ease-in-out"
+         [ngStyle]="{'transform': 'translateX(' + (-currentSlide * slideWidth) + 'px)'}">
+      <div *ngFor="let image of carouselImages" class="carousel-slide flex-shrink-0 w-full h-full">
+        <img [src]="image" alt="carousel image" class="w-full h-full object-cover rounded-lg">
+      </div>
+    </div>
+  
+    <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <span *ngFor="let image of carouselImages; let i = index"
+            [class]="i === currentSlide ? 'bg-white' : 'bg-purple-700'"
+            class="h-2 w-2 rounded-full inline-block cursor-pointer"
+            (click)="setSlide(i)">
+      </span>
+    </div>
+  </div>
+  

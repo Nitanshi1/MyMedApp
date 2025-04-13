@@ -1,0 +1,60 @@
+<div class="relative overflow-hidden rounded-t-lg mb-4 w-full">
+  <div>
+    <img
+      [src]="product.images[0]"
+      [routerLink]="'/product/' + product._id"
+      alt="{{ product.name }}"
+      class="w-full h-48 object-cover transition-transform duration-300 transform group-hover:scale-105"
+    />
+
+    <div class="flex flex-col justify-between w-full h-full">
+      <div [routerLink]="'/product/' + product._id">
+        <h4 class="text-lg font-semibold text-gray-700 mb-2">
+          {{ product.name }}
+        </h4>
+        <p class="text-sm text-gray-500 mb-2">{{ product.shortDescription }}</p>
+      </div>
+
+      <div class="flex justify-between w-100 items-baseline mt-auto gap-4">
+        <span class="text-lg font-bold text-purple-400">
+          <s>{{ product.price }}₹</s>
+        </span>
+
+        <span class="text-sm text-orange-400">
+          {{ product.discount }}% OFF
+        </span>
+
+        <span class="text-lg font-bold text-purple-500">
+          {{ SellingPrice }}₹
+        </span>
+      </div>
+
+      <div class="flex justify-center align-top w-80 h-10 mt-2">
+        <div class="flex space-x-2">
+          <!-- WishList Button -->
+          <button
+            class="px-2 text-purple-500 rounded-lg shadow hover:bg-purple-200"
+            mat-fab
+            color="warn"
+            title="Add to WishList"
+            (click)="addToWishList(product)"
+          >
+            <mat-icon>
+              {{ isInWishList(product) ? 'favorite' : 'favorite_border' }}
+            </mat-icon>
+          </button>
+
+          <!-- Add/Remove from Cart -->
+          <button
+            (click)="addToCart(product)"
+            class="mt-0 px-4  bg-purple-600 text-white rounded-lg shadow hover:bg-purple-700"
+          >
+            <mat-icon>
+              {{ isProductInCart(product._id!) ? 'remove_shopping_cart' : 'add_shopping_cart' }}
+            </mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

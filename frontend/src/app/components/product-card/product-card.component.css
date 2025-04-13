@@ -1,0 +1,22 @@
+.product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 16px; 
+  }
+  
+  .relative {
+
+    overflow: hidden; 
+  }
+  .flex {
+    display: flex; /* Ensure flex display */
+    align-items: center; /* Center items vertically */
+  }
+  
+  .mt-auto {
+    margin-top: auto; /* Pushes the pricing section to the bottom */
+  }
+  button i {
+    font-size: 1.2rem; /* Adjust size as needed */
+  }
+  
